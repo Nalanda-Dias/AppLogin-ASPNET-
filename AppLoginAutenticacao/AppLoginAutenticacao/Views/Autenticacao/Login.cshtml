@@ -6,6 +6,13 @@
 
 <h2>Login</h2>
 
+@if(TempData["MensagemLogin"] != null)
+{
+    <div class=" alert alert-success">
+        @TempData["MensagemLogin"]
+    </div>
+}
+
 
 @using (Html.BeginForm()) 
 {

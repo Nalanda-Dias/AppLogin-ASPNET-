@@ -17,23 +17,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", style = "color: black;  font-size: 15px; font-family: Cursive;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Administração", "Index", "Administrativo")</li>
+                    <li>@Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
+                    <li>@Html.ActionLink("Administração", "Index", "Administrativo", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Alterar Senha", "AlterarSenha", "Autenticacao")</li>
-                        <li>@Html.ActionLink("Sair", "Logout", "Autenticacao")</li>
+                        <li>@Html.ActionLink("Olá " + @User.Identity.Name, "", "", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
+                        <li>@Html.ActionLink("Alterar Senha", "AlterarSenha", "Autenticacao", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
+                        <li>@Html.ActionLink("Sair", "Logout", "Autenticacao", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Cadastre-se", "Insert", "Autenticacao")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Autenticacao")</li>
+                        <li>@Html.ActionLink("Cadastre-se", "Insert", "Autenticacao", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Autenticacao", new { area = "" }, new { style = "color: black;  font-size: 15px; font-family: Cursive;" })</li>
                     }
                 </ul>
             </div>

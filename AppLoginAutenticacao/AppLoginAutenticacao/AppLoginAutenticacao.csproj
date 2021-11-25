@@ -186,8 +186,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Autenticacao\Insert.cshtml" />
     <Content Include="Views\Autenticacao\Login.cshtml" />
-    <Content Include="Views\Administrativo\Index.cshtml" />
     <Content Include="Views\Autenticacao\AlterarSenha.cshtml" />
+    <Content Include="Views\Administrativo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

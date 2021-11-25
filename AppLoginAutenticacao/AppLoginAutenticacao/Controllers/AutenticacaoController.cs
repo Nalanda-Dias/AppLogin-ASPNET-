@@ -33,7 +33,9 @@ namespace AppLoginAutenticacao.Controllers
                 Senha = Hash.GerarHash(viewmodel.Senha)
             };
             novousuario.Insert(novousuario);
-            return RedirectToAction("Index", "Home");
+
+            TempData["MensagemLogin"] = "Cadastro realizado com sucesso! Faça o Login.";
+            return RedirectToAction("Login", "Autenticacao");
         }
 
         public ActionResult LoginBusca(string Login)
@@ -51,6 +53,7 @@ namespace AppLoginAutenticacao.Controllers
             return Json(!LoginExists, JsonRequestBehavior.AllowGet);
         }
 
+  
         public  ActionResult Login(string ReturnUrl)
         {
             var viewmodel = new LoginViewModel
@@ -93,7 +96,7 @@ namespace AppLoginAutenticacao.Controllers
             if (!String.IsNullOrWhiteSpace(viewmodel.UrlRetorno) || Url.IsLocalUrl(viewmodel.UrlRetorno))
                 return Redirect(viewmodel.UrlRetorno);
             else
-                return RedirectToAction("Index", "Administrativo");
+                return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()
@@ -102,11 +105,18 @@ namespace AppLoginAutenticacao.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public ActionResult AlterarSenha()
+        {
+            
+                return View();
+        }
+
         [Authorize]
         [HttpPost]
         public ActionResult AlterarSenha(AlterarSenhaViewModels viewmodel)
         {
-            if (!ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return View();
             }
@@ -117,14 +127,17 @@ namespace AppLoginAutenticacao.Controllers
             Usuario usuario = new Usuario();
             usuario = usuario.SelectUsuario(login);
 
-            if(Hash.GerarHash(viewmodel.NovaSenha) == usuario.Senha)
+            if (Hash.GerarHash(viewmodel.NovaSenha) == usuario.Senha)
             {
                 ModelState.AddModelError("SenhaAtual", "Senha incorreta");
                 return View();
             }
 
             usuario.Senha = Hash.GerarHash(viewmodel.NovaSenha);
+
             usuario.UpdateSenha(usuario);
+
+            TempData["MensagemLogin"] = "Senha alterada com sucesso!";
 
             return RedirectToAction("Index", "Home");
         }
